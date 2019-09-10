@@ -3,19 +3,20 @@ function validate(password) {
     var upper = /[A-Z]/;
     var lower = /[a-z]/;
     var number = /[0-9]/;
+    let pass =passLength.test(password) && upper.test(password) &&
+    lower.test(password) && number.test(password);
 
-    if (passLength.test(password) &&
-        upper.test(password) &&
-        lower.test(password) &&
-        number.test(password)) {
-        return "valid password";
-    }
-    else{
-      return "ERROR! Password must have atleast:\n 1 lowercase letter\n 1 uppercase letter\n 1 number\n And be 8 characters or longer";
-  }
+    try{
+      if (pass == false)
+        throw new Error ("ERROR! Password must have atleast:\n 1 lowercase letter\n 1 uppercase letter\n 1 number\n And be 8 characters or longer");
+      }
+      catch(err){
+        console.log(err);
+      }
+      return pass;
 }
 
-function password_is_ok(password) {
+function	password_is_ok(password) {
     var minLength = /(?=.{8,})/;
     var upper = /[A-Z]/;
     var lower = /[a-z]/;
@@ -27,9 +28,7 @@ function password_is_ok(password) {
     var num = number.test(password);
 
     if (length && (up || low || num)) {
-        return "valid password";
+        return true;
     }
-    return "ERROR!\nPassword must be 8 characters or longer and atlease 1 uppercase, 1 lowercase or 1 number";
+    return false;
 }
-
-console.log(validate('tebogoditse'));
